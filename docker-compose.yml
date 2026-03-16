@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  gdb-demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gdb-demo
+    image: gdb-demo:latest
+    environment:
+      DEMO: ${DEMO:-1}
+    command: ["${DEMO:-1}"]
+    privileged: true
+    ulimits:
+      core:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./cores:/cores
+    stdin_open: true
+    tty: true
+    restart: "no"
